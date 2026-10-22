@@ -7,7 +7,7 @@
     <title>Return Request Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">   
 </head>
 
 <body>
@@ -116,27 +116,27 @@
             <div class="row full">
                 <div class="field">
                     <label for="layout">Layout</label>
-                    <input type="text" id="Shisha World B2C" name="Layout" value="#Shisha World B2C" readonly
-                        tabindex="-1">
+                    <input type="text" id="layout" name="Layout" value="Shisha World B2C" readonly tabindex="-1">
                 </div>
             </div>
             <div class="row full">
                 <div class="field">
                     <label for="source">Source</label>
-                    <input type="text" id="OOKA Return Request Form" name="Source" value="#OOKA Return Request Form"
-                        readonly tabindex="-1">
+                    <input type="text" id="source" name="Source" value="OOKA Return Request Form" readonly
+                        tabindex="-1">
                 </div>
             </div>
             <div class="row full">
                 <div class="field">
                     <label for="leadFormLanguage">Lead Form Language</label>
-                    <input type="text" id="English" name="English" value="#English" readonly tabindex="-1">
+                    <input type="text" id="leadFormLanguage" name="LeadFormLanguage" value="English" readonly
+                        tabindex="-1">
                 </div>
             </div>
             <div class="row full">
                 <div class="field">
                     <label for="status">Status</label>
-                    <input type="text" id="Open" name="Status" value="#Open" readonly tabindex="-1">
+                    <input type="text" id="status" name="Status" value="Open" readonly tabindex="-1">
                 </div>
             </div>
         </div>
@@ -187,10 +187,9 @@
 
         /* ============================================================
            AZURE FUNCTION SUBMISSION
-           Put your Azure Function URL here (include ?code=... if the
-           function uses a function key).
+           The URL comes from the form's action="" attribute.
            ============================================================ */
-        const AZURE_FUNCTION_URL = 'https://YOUR-FUNCTION-APP.azurewebsites.net/api/ReturnRequest?code=YOUR_FUNCTION_KEY';
+        const AZURE_FUNCTION_URL = document.getElementById('returnForm').action;
 
         // Sent with every submission
         const FORM_BRAND = 'OOKA';
