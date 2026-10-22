@@ -103,6 +103,22 @@ const FORM_LANGUAGE = 'English';
         if (field) field.classList.remove('invalid');
     });
 
+    // Read every field in the Hidden Fields section by its LABEL,
+    // so ids/names can be anything. "Lead Form Language" -> leadFormLanguage
+    function getHiddenFields() {
+        const out = {};
+        document.querySelectorAll('.hidden-section .field').forEach(field => {
+            const label = field.querySelector('label');
+            const input = field.querySelector('input, select, textarea');
+            if (!label || !input) return;
+            const key = label.textContent.trim().toLowerCase()
+                .replace(/[^a-z0-9]+(.)/g, (m, c) => c.toUpperCase())
+                .replace(/[^a-zA-Z0-9]/g, '');
+            if (key) out[key] = (input.value || '').trim();
+        });
+        return out;
+    }
+
     // Build the JSON payload sent to Azure
     function buildPayload() {
         const val = id => document.getElementById(id).value.trim();
@@ -118,10 +134,7 @@ const FORM_LANGUAGE = 'English';
             submittedAt: new Date().toISOString(),
             brand: FORM_BRAND,
             language: FORM_LANGUAGE,
-            layout: val('layout'),
-            source: val('source'),
-            leadFormLanguage: val('leadFormLanguage'),
-            status: val('status'),
+            ...getHiddenFields(),
             contact: {
                 firstName: val('firstName'),
                 lastName: val('lastName'),
